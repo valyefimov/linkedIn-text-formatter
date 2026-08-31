@@ -14,7 +14,7 @@ interface EmphasisAttrs {
 
 const EMPHASIS_FONTS: Record<Family, Record<"plain" | "bold" | "italic" | "both", FontId>> = {
   serif: { plain: "normal", bold: "bold", italic: "italic", both: "boldItalic" },
-  sans: { plain: "sans", bold: "sansBold", italic: "sansItalic", both: "sansBoldItalic" },
+  sans: { plain: "normal", bold: "sansBold", italic: "sansItalic", both: "sansBoldItalic" },
 };
 
 const ATTRS_BY_FONT: Partial<Record<FontId, EmphasisAttrs>> = {
