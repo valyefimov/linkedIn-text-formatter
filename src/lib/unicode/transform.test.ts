@@ -59,9 +59,9 @@ describe("toggleEmphasis", () => {
     expect(toggleEmphasis("𝗛i", "bold")).toBe("𝗛𝗶");
   });
 
-  it("leaves digits, spaces and other fonts alone", () => {
+  it("leaves digits and spaces alone and keeps other fonts", () => {
     expect(toggleEmphasis("a 1", "bold")).toBe("𝗮 1");
-    expect(toggleEmphasis("𝚑i", "bold")).toBe("𝚑i");
+    expect(toggleEmphasis("𝚑i", "bold")).toBe("𝚑𝗶");
   });
 
   it("returns text without letters unchanged", () => {
