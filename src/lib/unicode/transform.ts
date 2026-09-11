@@ -120,3 +120,11 @@ const toggleMark = (text: string, mark: string): string =>
 
 export const toggleUnderline = (text: string): string => toggleMark(text, UNDERLINE_MARK);
 export const toggleStrike = (text: string): string => toggleMark(text, STRIKE_MARK);
+
+/** Applies `font` to the text, or strips it back to plain text if every letter already uses it. */
+export const toggleFont = (text: string, font: FontId): string => {
+  const letters = Array.from(text).filter((c) => isAsciiLetter(originOf(c)?.ascii ?? c));
+  if (letters.length === 0) return text;
+  const active = letters.every((c) => originOf(c)?.font === font);
+  return applyFont(text, active ? "normal" : font);
+};

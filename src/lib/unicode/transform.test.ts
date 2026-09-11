@@ -3,6 +3,7 @@ import {
   applyFont,
   normalize,
   toggleEmphasis,
+  toggleFont,
   toggleStrike,
   toggleUnderline,
 } from "./transform";
@@ -86,5 +87,20 @@ describe("underline and strikethrough", () => {
   it("combines with other styles", () => {
     const text = toggleStrike(toggleUnderline("ab"));
     expect(toggleUnderline(text)).toBe("a̶b̶");
+  });
+});
+
+describe("toggleFont", () => {
+  it("applies the font and removes it again", () => {
+    expect(toggleFont("ab 1", "monospace")).toBe("𝚊𝚋 𝟷");
+    expect(toggleFont("𝚊𝚋 𝟷", "monospace")).toBe("ab 1");
+  });
+
+  it("replaces a different font", () => {
+    expect(toggleFont("𝗮𝗯", "monospace")).toBe("𝚊𝚋");
+  });
+
+  it("ignores text without letters", () => {
+    expect(toggleFont("123", "monospace")).toBe("123");
   });
 });
