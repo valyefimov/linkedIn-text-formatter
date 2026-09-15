@@ -1,0 +1,82 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.group {
+  display: flex;
+  gap: 2px;
+}
+
+.group + .group {
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+}
+
+.button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 14px;
+  transition:
+    background 0.15s var(--ease),
+    color 0.15s var(--ease),
+    border-color 0.15s var(--ease);
+}
+
+.button code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: -0.05em;
+}
+
+.button:hover:not(:disabled),
+.button[aria-pressed="true"] {
+  background: var(--surface-2);
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+.button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.button::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  translate: -50% 4px;
+  padding: 4px 8px;
+  border: 1px solid var(--border-hover);
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.15s var(--ease),
+    translate 0.15s var(--ease);
+  z-index: 20;
+}
+
+.button:hover:not(:disabled)::after,
+.button:focus-visible::after {
+  opacity: 1;
+  translate: -50% 0;
+  transition-delay: 0.4s;
+}
