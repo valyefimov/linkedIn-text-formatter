@@ -1,0 +1,36 @@
+.region {
+  position: fixed;
+  right: 0;
+  bottom: 24px;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-hover);
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.9);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+  font-size: 13px;
+  pointer-events: auto;
+}
+
+.action {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent-bright);
+  font-weight: 500;
+}
+
+.action:hover {
+  text-decoration: underline;
+}
