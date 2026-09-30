@@ -40,5 +40,5 @@ The preview card is the only light-ish element: it imitates LinkedIn dark mode (
 ## Accessibility
 
 - Visible focus ring on every control (`--accent-glow`), contrast AA on text.
-- Toolbar buttons have `aria-label` and tooltips; toggles use `aria-pressed`.
+- Toolbar buttons have `aria-label` and tooltips; the emoji button and radio-style switchers expose `aria-pressed` / `aria-checked`.
 - Warn users that Unicode styling hurts screen readers and search.
