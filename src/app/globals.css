@@ -1,12 +1,12 @@
 :root {
-  --bg: #000;
-  --surface: #0a0a0a;
-  --surface-2: #111;
-  --border: #1f1f1f;
-  --border-hover: #333;
+  --bg: #131316;
+  --surface: #1a1a1e;
+  --surface-2: #222227;
+  --border: #2b2b31;
+  --border-hover: #43434b;
   --text: #ededed;
   --text-dim: #a1a1a1;
-  --text-faint: #6b6b6b;
+  --text-faint: #7a7a84;
   --accent: #0a66c2;
   --accent-bright: #70b5f9;
   --accent-glow: rgba(10, 102, 194, 0.35);

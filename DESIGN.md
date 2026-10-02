@@ -1,20 +1,20 @@
 # Design
 
-Pure black, quiet, precise. The editor is the hero; chrome stays out of the way.
+Near-black graphite, quiet, precise. Pure `#000` is avoided: it feels harsh and flattens depth. The editor is the hero; chrome stays out of the way.
 Reference mood: Linear / Vercel dashboards.
 
 ## Color tokens
 
 | Token            | Value                    | Use                          |
 | ---------------- | ------------------------ | ---------------------------- |
-| `--bg`           | `#000000`                | page background              |
-| `--surface`      | `#0a0a0a`                | cards, editor                |
-| `--surface-2`    | `#111111`                | hover, inputs                |
-| `--border`       | `#1f1f1f`                | hairlines                    |
-| `--border-hover` | `#333333`                | focused / hovered borders    |
+| `--bg`           | `#131316`                | page background              |
+| `--surface`      | `#1a1a1e`                | cards, editor                |
+| `--surface-2`    | `#222227`                | hover, inputs                |
+| `--border`       | `#2b2b31`                | hairlines                    |
+| `--border-hover` | `#43434b`                | focused / hovered borders    |
 | `--text`         | `#ededed`                | primary text                 |
 | `--text-dim`     | `#a1a1a1`                | secondary text               |
-| `--text-faint`   | `#6b6b6b`                | hints, placeholders          |
+| `--text-faint`   | `#7a7a84`                | hints, placeholders          |
 | `--accent`       | `#0a66c2`                | LinkedIn blue, hashtags/links|
 | `--accent-glow`  | `rgba(10,102,194,.35)`   | focus ring, glow             |
 | `--ok`/`--warn`/`--bad` | `#3ecf8e` / `#f5a524` / `#ff4d4f` | limit meter states |

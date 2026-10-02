@@ -7,7 +7,7 @@
   padding: 8px;
   border: 1px solid var(--border-hover);
   border-radius: var(--radius-lg);
-  background: rgba(10, 10, 10, 0.92);
+  background: rgba(26, 26, 30, 0.92);
   backdrop-filter: blur(12px);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
   transform-origin: top left;
