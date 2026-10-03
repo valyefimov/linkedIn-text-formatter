@@ -17,11 +17,6 @@
   min-width: 0;
 }
 
-.gallery {
-  grid-column: 1 / -1;
-  margin-top: 40px;
-}
-
 .editor {
   position: relative;
   overflow: hidden;

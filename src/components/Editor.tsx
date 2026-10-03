@@ -27,10 +27,9 @@ import {
   toggleList,
   transformSelection,
 } from "@/lib/text";
-import { type FontId, applyFont, normalize, toggleEmphasis, toggleFont, toggleStrike, toggleUnderline } from "@/lib/unicode";
+import { normalize, toggleEmphasis, toggleFont, toggleStrike, toggleUnderline } from "@/lib/unicode";
 import styles from "./Editor.module.css";
 import { EmojiPicker } from "./EmojiPicker";
-import { FontGallery } from "./FontGallery";
 import { CheckIcon, CopyIcon, WarningIcon } from "./icons";
 import { LimitMeter } from "./LimitMeter";
 import { Preview } from "./Preview";
@@ -207,15 +206,6 @@ export const Editor = () => {
     runAction(action);
   };
 
-  const applyWholeFont = (font: FontId) => {
-    if (mode === "markdown") {
-      write.set(applyFont(output, font));
-      setMode("write");
-    } else {
-      write.set(applyFont(write.value, font));
-    }
-  };
-
   const copyOutput = async () => {
     const ok = await copy(output, "output");
     if (!ok) showToast("Couldn't access the clipboard");
@@ -375,10 +365,6 @@ export const Editor = () => {
         <LimitMeter text={output} target={target} onTargetChange={setTarget} />
         <Preview text={output} device={device} onDeviceChange={setDevice} />
       </aside>
-
-      <div className={styles.gallery}>
-        <FontGallery text={output} onApply={applyWholeFont} />
-      </div>
 
       <Toast toast={toast} onDismiss={() => setToast(null)} />
     </div>

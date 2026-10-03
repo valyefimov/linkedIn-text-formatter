@@ -15,7 +15,6 @@ poorly by screen readers. Use them for emphasis.
   Code can be rendered monospace or bold. Pasted Markdown is converted automatically (undoable)
 - Live limits for posts (3000), comments (1250), headlines (220) and About (2600), and the “…see more” fold
 - Feed preview with mobile and desktop widths, hashtag/mention/link highlighting
-- A gallery of every Unicode font (bold, italic, script, fraktur, doublestruck, monospace, fullwidth, circled…)
 - Drafts are stored in `localStorage`; nothing leaves the browser
 
 ## Development
