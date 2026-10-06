@@ -16,9 +16,9 @@
   padding: 10px 14px;
   border: 1px solid var(--border-hover);
   border-radius: 999px;
-  background: rgba(34, 34, 39, 0.92);
+  background: color-mix(in srgb, var(--surface-2) 92%, transparent);
   backdrop-filter: blur(12px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 12px 40px var(--shadow);
   font-size: 13px;
   pointer-events: auto;
 }

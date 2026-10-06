@@ -217,7 +217,7 @@
   border: 0;
   border-radius: var(--radius);
   background: var(--text);
-  color: #000;
+  color: var(--on-primary);
   font-weight: 500;
   transition:
     background 0.15s var(--ease),
@@ -225,7 +225,7 @@
 }
 
 .primary:hover:not(:disabled) {
-  box-shadow: 0 0 0 4px rgba(237, 237, 237, 0.12);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--text) 14%, transparent);
 }
 
 .primary:disabled {
