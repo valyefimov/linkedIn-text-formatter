@@ -106,3 +106,16 @@ export const WarningIcon = () => (
     <path d="M8 2 14.5 13.5h-13L8 2ZM8 6.5v3M8 11.5v.01" />
   </Icon>
 );
+
+export const SunIcon = () => (
+  <Icon>
+    <circle cx="8" cy="8" r="2.8" />
+    <path d="M8 1.5v1.4M8 13.1v1.4M1.5 8h1.4M13.1 8h1.4M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1" />
+  </Icon>
+);
+
+export const MoonIcon = () => (
+  <Icon>
+    <path d="M13.5 9.6A5.6 5.6 0 0 1 6.4 2.5a5.6 5.6 0 1 0 7.1 7.1Z" />
+  </Icon>
+);

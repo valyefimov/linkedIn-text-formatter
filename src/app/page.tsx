@@ -1,4 +1,5 @@
 import { Editor } from "@/components/Editor";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import styles from "./page.module.css";
 
 const FEATURES = [
@@ -10,6 +11,7 @@ const FEATURES = [
 export default function Page() {
   return (
     <main className={styles.page}>
+      <ThemeToggle />
       <div className={styles.glow} aria-hidden="true" />
       <header className={styles.hero}>
         <p className={styles.eyebrow}>Free · No sign-up · Runs in your browser</p>
