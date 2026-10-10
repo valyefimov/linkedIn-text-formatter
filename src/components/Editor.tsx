@@ -15,7 +15,7 @@ import {
 import { useCopy } from "@/hooks/use-copy";
 import { useHistory } from "@/hooks/use-history";
 import { usePersistentState } from "@/hooks/use-persistent-state";
-import { type MarkdownOptions, DEFAULT_MARKDOWN_OPTIONS, markdownToUnicode } from "@/lib/markdown";
+import { type CodeStyle, type MarkdownOptions, markdownToUnicode } from "@/lib/markdown";
 import {
   type Device,
   type ListKind,
@@ -63,10 +63,12 @@ const MODES: readonly { id: Mode; label: string }[] = [
 
 export const Editor = () => {
   const [mode, setMode, modeReady] = usePersistentState<Mode>("ltf:mode", "write");
-  const [options, setOptions] = usePersistentState<MarkdownOptions>("ltf:md-options", DEFAULT_MARKDOWN_OPTIONS);
+  const [codeStyle, setCodeStyle] = usePersistentState<CodeStyle>("ltf:code-style", "monospace");
   const [autoConvert, setAutoConvert] = usePersistentState("ltf:auto-convert", true);
   const [target, setTarget] = usePersistentState<TargetId>("ltf:target", "post");
   const [device, setDevice] = usePersistentState<Device>("ltf:device", "desktop");
+
+  const options = useMemo<MarkdownOptions>(() => ({ family: "sans", codeStyle }), [codeStyle]);
 
   const write = useHistory("");
   const markdown = useHistory("");
@@ -250,22 +252,12 @@ export const Editor = () => {
               ))}
             </div>
             <div className={styles.options}>
-              <label className={styles.option}>
-                Font
-                <select
-                  value={options.family}
-                  onChange={(e) => setOptions({ ...options, family: e.target.value as MarkdownOptions["family"] })}
-                >
-                  <option value="sans">Sans</option>
-                  <option value="serif">Serif</option>
-                </select>
-              </label>
               {mode === "markdown" ? (
                 <label className={styles.option}>
                   Code
                   <select
-                    value={options.codeStyle}
-                    onChange={(e) => setOptions({ ...options, codeStyle: e.target.value as MarkdownOptions["codeStyle"] })}
+                    value={codeStyle}
+                    onChange={(e) => setCodeStyle(e.target.value as CodeStyle)}
                   >
                     <option value="monospace">Monospace</option>
                     <option value="bold">Bold</option>
