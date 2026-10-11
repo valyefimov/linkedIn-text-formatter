@@ -354,8 +354,8 @@ export const Editor = () => {
       </div>
 
       <aside className={styles.side}>
-        <LimitMeter text={output} target={target} onTargetChange={setTarget} />
         <Preview text={output} device={device} onDeviceChange={setDevice} />
+        <LimitMeter text={output} target={target} onTargetChange={setTarget} />
       </aside>
 
       <Toast toast={toast} onDismiss={() => setToast(null)} />
