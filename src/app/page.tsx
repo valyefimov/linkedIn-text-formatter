@@ -44,6 +44,10 @@ export default function Page() {
           Formatting uses Unicode look-alike characters, so it is not searchable and may be read poorly by screen
           readers. Not affiliated with LinkedIn.
         </p>
+        <p className={styles.credit}>
+          Built by <a href="https://yefimov.tech">Valentyn Yefimov</a> ·{" "}
+          <a href="https://github.com/valyefimov">GitHub</a> · <a href="https://yefimov.tech">yefimov.tech</a>
+        </p>
       </footer>
     </main>
   );

@@ -113,6 +113,21 @@
   margin: 0;
 }
 
+.credit {
+  margin-top: 12px !important;
+}
+
+.credit a {
+  color: var(--text-dim);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s var(--ease);
+}
+
+.credit a:hover {
+  color: var(--text);
+}
+
 @keyframes rise {
   from {
     opacity: 0;

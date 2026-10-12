@@ -7,6 +7,8 @@ LinkedIn has no rich text, so styles are Unicode look-alike characters
 (Mathematical Alphanumeric Symbols and combining marks). They are not searchable and are read
 poorly by screen readers. Use them for emphasis.
 
+Built by [Valentyn Yefimov](https://yefimov.tech) · [GitHub](https://github.com/valyefimov) · [yefimov.tech](https://yefimov.tech)
+
 ## Features
 
 - Toolbar and shortcuts (`⌘B`, `⌘I`, `⌘U`, `⌘⇧X`, `⌘E`) that act on the selection or the word at the caret

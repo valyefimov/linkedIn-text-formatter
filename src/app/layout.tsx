@@ -9,6 +9,8 @@ const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
+  authors: [{ name: "Valentyn Yefimov", url: "https://yefimov.tech" }],
+  creator: "Valentyn Yefimov",
   title: "LinkedIn Text Formatter",
   description:
     "Write LinkedIn posts with bold, italic, monospace code and lists. Convert Markdown to LinkedIn-ready text and preview your post.",
