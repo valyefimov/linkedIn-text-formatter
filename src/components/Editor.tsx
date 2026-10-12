@@ -334,6 +334,7 @@ export const Editor = () => {
               className={styles.primary}
               onClick={() => void copyOutput()}
               disabled={output === ""}
+              data-copied={copiedKey === "output"}
               whileTap={{ scale: 0.97 }}
             >
               {copiedKey === "output" ? <CheckIcon /> : <CopyIcon />}
