@@ -102,7 +102,7 @@ export const Preview = ({ text, device, onDeviceChange }: PreviewProps) => {
             </div>
           </div>
 
-          <motion.div layout="position" className={styles.body}>
+          <div className={styles.body}>
             {text.trim() === "" ? (
               <p className={styles.placeholder}>{PLACEHOLDER}</p>
             ) : (
@@ -132,7 +132,7 @@ export const Preview = ({ text, device, onDeviceChange }: PreviewProps) => {
                 </motion.button>
               )}
             </AnimatePresence>
-          </motion.div>
+          </div>
 
           <div className={styles.counts}>
             <span>👍❤️ 57</span>

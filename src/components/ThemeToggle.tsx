@@ -6,6 +6,8 @@ import { THEME_KEY, type Theme, otherTheme, resolveTheme } from "@/lib/theme/the
 import { MoonIcon, SunIcon } from "./icons";
 import styles from "./ThemeToggle.module.css";
 
+const SWITCH_MS = 350;
+
 const readTheme = (): Theme => {
   const applied = document.documentElement.dataset.theme;
   return applied === "light" || applied === "dark"
@@ -16,16 +18,14 @@ const readTheme = (): Theme => {
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState<Theme | null>(null);
 
-  useEffect(() => {
-    setTheme(readTheme());
-    // Enable colour transitions only after the first paint so the initial theme never animates.
-    const frame = requestAnimationFrame(() => document.documentElement.classList.add("theme-ready"));
-    return () => cancelAnimationFrame(frame);
-  }, []);
+  useEffect(() => setTheme(readTheme()), []);
 
   const toggle = () => {
     const next = otherTheme(theme ?? readTheme());
-    document.documentElement.dataset.theme = next;
+    const root = document.documentElement;
+    root.classList.add("theme-switching");
+    root.dataset.theme = next;
+    window.setTimeout(() => root.classList.remove("theme-switching"), SWITCH_MS);
     try {
       window.localStorage.setItem(THEME_KEY, next);
     } catch {

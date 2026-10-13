@@ -69,8 +69,9 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-html.theme-ready body,
-html.theme-ready body * {
+/* Only while the theme is being switched, so ordinary interactions never pay for transitions on every element. */
+html.theme-switching body,
+html.theme-switching body * {
   transition:
     background-color 0.25s var(--ease),
     border-color 0.25s var(--ease),

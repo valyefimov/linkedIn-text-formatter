@@ -6,6 +6,7 @@ import {
   type ClipboardEvent,
   type KeyboardEvent,
   useCallback,
+  useDeferredValue,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -87,6 +88,9 @@ export const Editor = () => {
     () => (mode === "markdown" ? markdownToUnicode(markdown.value, options) : write.value),
     [mode, markdown.value, write.value, options],
   );
+
+  // Typing stays responsive: the preview and counters may lag a frame behind the textarea.
+  const deferredOutput = useDeferredValue(output);
 
   // Restore drafts after hydration so the server and first client render agree.
   useEffect(() => {
@@ -355,8 +359,8 @@ export const Editor = () => {
       </div>
 
       <aside className={styles.side}>
-        <Preview text={output} device={device} onDeviceChange={setDevice} />
-        <LimitMeter text={output} target={target} onTargetChange={setTarget} />
+        <Preview text={deferredOutput} device={device} onDeviceChange={setDevice} />
+        <LimitMeter text={deferredOutput} target={target} onTargetChange={setTarget} />
       </aside>
 
       <Toast toast={toast} onDismiss={() => setToast(null)} />
