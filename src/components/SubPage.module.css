@@ -1,0 +1,25 @@
+.page {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 24px 48px;
+}
+
+.back {
+  display: inline-block;
+  max-width: 760px;
+  margin: 0 auto 32px;
+  color: var(--text-dim);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.back:hover {
+  color: var(--text);
+}
+
+.page > .back {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+}
