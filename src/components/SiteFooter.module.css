@@ -1,0 +1,35 @@
+.footer {
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+
+.footer a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.15s var(--ease);
+}
+
+.footer a:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.credit {
+  margin-top: 12px !important;
+}
