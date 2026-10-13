@@ -82,7 +82,7 @@ const scenes = [
   {
     say: "That's LinkedIn Text Formatter. Free and private, nothing leaves your browser. Built by Valentyn Yefimov.",
     show: () => (text) =>
-      card("Write it. Format it. Post it.", "LinkedIn Text Formatter", text, `<div class="links"><b>Valentyn Yefimov</b><span>github.com/valyefimov</span><span>yefimov.tech</span></div>`),
+      card("Write it. Format it. Post it.", "LinkedIn Text Formatter", text, `<div class="links"><b>linkedin.yefimov.tech</b><span>Valentyn Yefimov</span><span>github.com/valyefimov</span></div>`),
   },
 ].map((scene) => ({
   say: scene.say,
