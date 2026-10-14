@@ -34,7 +34,7 @@ const STYLES: readonly (readonly [string, string])[] = [
 
 export const Guide = () => (
   <article className={`${styles.prose} ${styles.wide}`} aria-labelledby="guide-title">
-    <section>
+    <section className={styles.panel}>
       <h2 id="guide-title">How do I format text for a LinkedIn post?</h2>
       <p>
         Write the post in the editor above, style the parts you want to stand out, and copy the result. LinkedIn does not
@@ -47,7 +47,7 @@ export const Guide = () => (
         <li>Press Copy for LinkedIn and paste into your post.</li>
       </ol>
     </section>
-    <section>
+    <section className={styles.panel}>
       <h2>What formatting does the editor support?</h2>
       <p>Everything below works in LinkedIn posts, comments, headlines and messages.</p>
       <dl className={styles.definitions}>
@@ -59,7 +59,7 @@ export const Guide = () => (
         ))}
       </dl>
     </section>
-    <section>
+    <section className={styles.panel}>
       <h2>How do I convert Markdown to LinkedIn text?</h2>
       <p>
         Switch to Markdown mode, or paste Markdown into the editor and it converts automatically. The converter maps each
@@ -87,7 +87,7 @@ export const Guide = () => (
         </table>
       </div>
     </section>
-    <section>
+    <section className={styles.panel}>
       <h2>What are the LinkedIn character limits?</h2>
       <p>
         Posts allow 3,000 characters. The counter in the editor switches between posts, comments, headlines and the About
@@ -118,30 +118,33 @@ export const Guide = () => (
         Only the post limit is documented by LinkedIn. The other numbers are observed values and can change without notice.
       </p>
     </section>
-    <section>
+    <section className={`${styles.panel} ${styles.span}`}>
       <h2>Is Unicode formatting bad for accessibility and search?</h2>
-      <p>
-        It has real costs. Styled letters come from the{" "}
-        <a href="https://www.unicode.org/charts/PDF/U1D400.pdf" rel="noopener noreferrer" target="_blank">
-          Unicode Mathematical Alphanumeric Symbols
-        </a>{" "}
-        block, so search does not match them as words and many screen readers read them letter by letter. Follow these
-        habits:
-      </p>
-      <ul>
-        <li>Style short phrases such as a hook or a key term, not whole paragraphs.</li>
-        <li>Keep keywords you want to be found in plain text.</li>
-        <li>Do not put essential information only in styled text.</li>
-      </ul>
-      <p>
-        See the{" "}
-        <a href="https://www.linkedin.com/help/linkedin" rel="noopener noreferrer" target="_blank">
-          LinkedIn Help Center
-        </a>{" "}
-        for the platform&apos;s own rules.
-      </p>
+      <div className={styles.split}>
+        <div>
+          <p>
+            It has real costs. Styled letters come from the{" "}
+            <a href="https://www.unicode.org/charts/PDF/U1D400.pdf" rel="noopener noreferrer" target="_blank">
+              Unicode Mathematical Alphanumeric Symbols
+            </a>{" "}
+            block, so search does not match them as words and many screen readers read them letter by letter.
+          </p>
+          <p>
+            See the{" "}
+            <a href="https://www.linkedin.com/help/linkedin" rel="noopener noreferrer" target="_blank">
+              LinkedIn Help Center
+            </a>{" "}
+            for the platform&apos;s own rules.
+          </p>
+        </div>
+        <ul className={styles.tips}>
+          <li>Style short phrases such as a hook or a key term, not whole paragraphs.</li>
+          <li>Keep keywords you want to be found in plain text.</li>
+          <li>Do not put essential information only in styled text.</li>
+        </ul>
+      </div>
     </section>
-    <section className={styles.span}>
+    <section className={`${styles.panel} ${styles.span}`}>
       <h2>Frequently asked questions</h2>
       <div className={styles.accordion}>
         {FAQ.map(({ question, answer }, index) => (

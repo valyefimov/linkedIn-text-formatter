@@ -226,7 +226,7 @@
 .wide {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 64px;
+  gap: 20px;
 }
 
 .wide > section {
@@ -234,7 +234,7 @@
 }
 
 .wide h2 {
-  margin-top: 40px;
+  margin-top: 0;
 }
 
 .span {
@@ -243,8 +243,13 @@
 
 
 @media (max-width: 900px) {
-  .wide {
+  .wide,
+  .split {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panel {
+    padding: 20px;
   }
 }
 
@@ -324,4 +329,107 @@
 
 .answer p {
   margin: 0;
+}
+
+/* Home page guide: equal-height panels in a two-column grid. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.panel h2 {
+  font-size: 22px;
+}
+
+.panel > p:last-child {
+  margin-bottom: 0;
+}
+
+/* Inner lists stretch to the panel height so neighbouring panels line up. */
+.panel > .steps,
+.panel > .definitions {
+  flex: 1;
+  grid-auto-rows: 1fr;
+  margin-bottom: 0;
+}
+
+.panel .steps li,
+.panel .definitions div {
+  border-color: var(--border);
+  background: var(--surface-2);
+}
+
+.panel .definitions div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.panel .steps li {
+  display: flex;
+  align-items: center;
+}
+
+.panel .steps li::before {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.panel .tableWrap {
+  flex: 1;
+  margin-bottom: 14px;
+  background: transparent;
+}
+
+.panel .tableWrap table {
+  height: 100%;
+}
+
+.panel .item {
+  background: var(--surface-2);
+}
+
+.panel .item[open] {
+  background: var(--bg);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 40px;
+  align-items: start;
+}
+
+.prose .tips {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tips li {
+  position: relative;
+  margin: 0;
+  padding: 12px 16px 12px 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+}
+
+.tips li::before {
+  content: "✓";
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.wide > section:not(.panel) h2 {
+  margin-top: 24px;
 }
