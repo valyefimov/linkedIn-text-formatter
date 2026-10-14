@@ -1,10 +1,23 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { toClipboardHtml } from "@/lib/text";
 
 const RESET_MS = 1600;
 
 const writeClipboard = async (text: string): Promise<void> => {
+  if (navigator.clipboard?.write && typeof ClipboardItem !== "undefined") {
+    try {
+      return await navigator.clipboard.write([
+        new ClipboardItem({
+          "text/plain": new Blob([text], { type: "text/plain" }),
+          "text/html": new Blob([toClipboardHtml(text)], { type: "text/html" }),
+        }),
+      ]);
+    } catch {
+      // Rich clipboard refused: fall back to plain text.
+    }
+  }
   if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
   const area = document.createElement("textarea");
   area.value = text;
