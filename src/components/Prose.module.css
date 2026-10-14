@@ -1,6 +1,5 @@
 .prose {
-  max-width: 760px;
-  margin: 0 auto;
+  width: 100%;
   color: var(--text-dim);
   font-size: 16px;
   line-height: 1.7;
@@ -215,4 +214,114 @@
   margin-top: 2px;
   color: var(--text-dim);
   font-size: 13px;
+}
+
+/* Specificity matches `.prose ul` / `.prose ol` so list resets are not overridden. */
+.prose .steps,
+.prose .related {
+  padding-left: 0;
+}
+
+/* Full-width variant used on the home page: sections flow into two columns. */
+.wide {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 64px;
+}
+
+.wide > section {
+  min-width: 0;
+}
+
+.wide h2 {
+  margin-top: 40px;
+}
+
+.span {
+  grid-column: 1 / -1;
+}
+
+
+@media (max-width: 900px) {
+  .wide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* FAQ accordion on native <details>: the answers stay in the HTML for search and assistive tech. */
+.accordion {
+  display: grid;
+  gap: 10px;
+}
+
+.item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  interpolate-size: allow-keywords;
+  transition:
+    border-color 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+
+.item:hover {
+  border-color: var(--border-hover);
+}
+
+.item[open] {
+  background: var(--surface-2);
+}
+
+.item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.item summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose .item h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.chevron {
+  display: grid;
+  flex: none;
+  place-items: center;
+  color: var(--text-faint);
+  transition:
+    transform 0.25s var(--ease),
+    color 0.2s var(--ease);
+}
+
+.item[open] .chevron {
+  color: var(--text);
+  transform: rotate(180deg);
+}
+
+.item::details-content {
+  height: 0;
+  overflow: clip;
+  transition:
+    height 0.28s var(--ease),
+    content-visibility 0.28s allow-discrete;
+}
+
+.item[open]::details-content {
+  height: auto;
+}
+
+.answer {
+  padding: 0 18px 16px;
+}
+
+.answer p {
+  margin: 0;
 }
