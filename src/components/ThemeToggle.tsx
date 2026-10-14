@@ -12,7 +12,7 @@ const readTheme = (): Theme => {
   const applied = document.documentElement.dataset.theme;
   return applied === "light" || applied === "dark"
     ? applied
-    : resolveTheme(null, window.matchMedia("(prefers-color-scheme: light)").matches);
+    : resolveTheme(null);
 };
 
 export const ThemeToggle = () => {

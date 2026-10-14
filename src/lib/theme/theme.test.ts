@@ -2,14 +2,14 @@ import { describe, expect, it } from "vitest";
 import { otherTheme, resolveTheme } from "./theme";
 
 describe("resolveTheme", () => {
-  it("prefers a stored choice over the system", () => {
-    expect(resolveTheme("dark", true)).toBe("dark");
-    expect(resolveTheme("light", false)).toBe("light");
+  it("keeps a stored choice", () => {
+    expect(resolveTheme("dark")).toBe("dark");
+    expect(resolveTheme("light")).toBe("light");
   });
 
-  it("falls back to the system preference for missing or invalid values", () => {
-    expect(resolveTheme(null, true)).toBe("light");
-    expect(resolveTheme("sepia", false)).toBe("dark");
+  it("defaults to light for missing or invalid values", () => {
+    expect(resolveTheme(null)).toBe("light");
+    expect(resolveTheme("sepia")).toBe("light");
   });
 });
 
