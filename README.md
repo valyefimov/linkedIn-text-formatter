@@ -36,23 +36,3 @@ npm test           # unit tests for the text engine
 npm run typecheck
 npm run build
 ```
-
-## Demo video
-
-`docs/demo.mp4` is generated from the real app, so it can be rebuilt whenever the UI changes:
-
-```bash
-npm run demo        # build, capture the UI with Puppeteer, narrate with termdub, mix music
-```
-
-Needs Google Chrome, `ffmpeg` and the free `edge-tts` voice (`pip install edge-tts`). The pipeline lives in
-[scripts/demo](scripts/demo): `capture.mjs` drives the app and saves frames, `build.mjs` writes the narration and
-burned-in captions with [termdub](https://github.com/valyefimov/termdub), and `music.mjs` synthesises the ambient
-track that ducks under the voice.
-
-## Deploy
-
-The app is a standard Next.js project; import the repository in Vercel (or run `npx vercel`).
-No environment variables are needed.
-
-See [CLAUDE.md](CLAUDE.md) for architecture and [DESIGN.md](DESIGN.md) for the design system.
