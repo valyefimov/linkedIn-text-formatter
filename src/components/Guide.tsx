@@ -34,7 +34,7 @@ const STYLES: readonly (readonly [string, string])[] = [
 
 export const Guide = () => (
   <article className={`${styles.prose} ${styles.wide}`} aria-labelledby="guide-title">
-    <section className={styles.panel}>
+    <section className={`${styles.panel} ${styles.span}`}>
       <h2 id="guide-title">How do I format text for a LinkedIn post?</h2>
       <p>
         Write the post in the editor above, style the parts you want to stand out, and copy the result. LinkedIn does not
@@ -47,7 +47,7 @@ export const Guide = () => (
         <li>Press Copy for LinkedIn and paste into your post.</li>
       </ol>
     </section>
-    <section className={styles.panel}>
+    <section className={`${styles.panel} ${styles.span}`}>
       <h2>What formatting does the editor support?</h2>
       <p>Everything below works in LinkedIn posts, comments, headlines and messages.</p>
       <dl className={styles.definitions}>

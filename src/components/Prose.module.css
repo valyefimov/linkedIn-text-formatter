@@ -335,26 +335,38 @@
 .panel {
   display: flex;
   flex-direction: column;
-  padding: 28px;
+  padding: 24px;
   border: 1px solid var(--border);
   border-radius: 20px;
   background: var(--surface);
 }
 
 .panel h2 {
-  font-size: 22px;
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.panel > p {
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .panel > p:last-child {
   margin-bottom: 0;
 }
 
-/* Inner lists stretch to the panel height so neighbouring panels line up. */
+/* Steps and supported styles run as compact rows of cards across the panel. */
 .panel > .steps,
 .panel > .definitions {
-  flex: 1;
-  grid-auto-rows: 1fr;
   margin-bottom: 0;
+}
+
+.panel > .steps {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.panel > .definitions {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 }
 
 .panel .steps li,
@@ -363,15 +375,10 @@
   background: var(--surface-2);
 }
 
-.panel .definitions div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .panel .steps li {
   display: flex;
   align-items: center;
+  min-height: 72px;
 }
 
 .panel .steps li::before {
