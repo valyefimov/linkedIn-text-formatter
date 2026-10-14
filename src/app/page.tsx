@@ -2,7 +2,7 @@ import { Editor } from "@/components/Editor";
 import { Guide } from "@/components/Guide";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { HeaderControls } from "@/components/HeaderControls";
 import { homeJsonLd } from "@/lib/site/json-ld";
 import { absoluteUrl } from "@/lib/site/site";
 import styles from "./page.module.css";
@@ -17,7 +17,7 @@ export default function Page() {
       <link rel="alternate" hrefLang="en" href={HOME} />
       <link rel="alternate" hrefLang="x-default" href={HOME} />
       <JsonLd data={homeJsonLd} />
-      <ThemeToggle />
+      <HeaderControls />
       <div className={styles.glow} aria-hidden="true" />
       <header className={styles.hero}>
         <p className={styles.eyebrow}>Free · No sign-up · Runs in your browser</p>

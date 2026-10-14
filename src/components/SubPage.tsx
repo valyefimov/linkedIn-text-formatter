@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/SiteFooter";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { HeaderControls } from "@/components/HeaderControls";
 import { pageJsonLd } from "@/lib/site/json-ld";
 import { UPDATED } from "@/lib/site/site";
 import prose from "./Prose.module.css";
@@ -18,7 +18,7 @@ interface SubPageProps {
 export const SubPage = ({ path, title, description, children }: SubPageProps) => (
   <main className={styles.page}>
     <JsonLd data={pageJsonLd(path, title, description)} />
-    <ThemeToggle />
+    <HeaderControls />
     <Link href="/" className={styles.back}>
       ← LinkedIn Text Formatter
     </Link>

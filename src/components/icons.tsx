@@ -119,3 +119,15 @@ export const MoonIcon = () => (
     <path d="M13.5 9.6A5.6 5.6 0 0 1 6.4 2.5a5.6 5.6 0 1 0 7.1 7.1Z" />
   </Icon>
 );
+
+export const InstallIcon = () => (
+  <Icon>
+    <path d="M8 2v8M4.8 7.2 8 10.4l3.2-3.2M2.5 13h11" />
+  </Icon>
+);
+
+export const ChevronDownIcon = () => (
+  <Icon>
+    <path d="m4 6.5 4 4 4-4" />
+  </Icon>
+);

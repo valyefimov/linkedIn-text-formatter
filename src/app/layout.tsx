@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { PwaRegister } from "@/components/PwaRegister";
 import type { ReactNode } from "react";
 import { AUTHOR, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site/site";
 import { THEME_INIT_SCRIPT } from "@/lib/theme/theme";
@@ -38,6 +39,8 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     locale: "en_US",
   },
+  appleWebApp: { capable: true, title: "LI Formatter", statusBarStyle: "black-translucent" },
+  formatDetection: { telephone: false },
   twitter: { card: "summary_large_image", title: SITE_TITLE, description: SITE_DESCRIPTION },
 };
 
@@ -54,6 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <body>
         <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <PwaRegister />
         {children}
       </body>
     </html>
