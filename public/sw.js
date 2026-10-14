@@ -4,7 +4,7 @@
 //  - Everything else on this origin: stale while revalidate.
 // The page also sends the assets it already loaded (message "CACHE_URLS") because a service
 // worker does not control the very first page load.
-const VERSION = "ltf-v2";
+const VERSION = "ltf-v3";
 const SHELL = ["/", "/about", "/privacy", "/terms"];
 const IMMUTABLE_PREFIXES = ["/_next/static/", "/icons/", "/screenshots/"];
 
