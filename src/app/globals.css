@@ -1,4 +1,23 @@
 :root {
+  /* Brand palette: raw values, shared by both themes. Components use the semantic tokens below. */
+  --linkedin-blue: #0a66c2;
+  --linkedin-blue-dark: #004182;
+  --linkedin-blue-light: #70b5f9;
+  --green-600: #0e9255;
+  --white: #fff;
+
+  /* Semantic tokens, theme independent. */
+  --on-accent: var(--white);
+  --accent-solid: var(--linkedin-blue);
+  --accent-solid-hover: var(--linkedin-blue-dark);
+  --success-solid: var(--green-600);
+  --accent-tint: color-mix(in srgb, var(--linkedin-blue) 8%, transparent);
+  --accent-halo: color-mix(in srgb, var(--linkedin-blue) 22%, transparent);
+  --accent-solid-shadow: color-mix(in srgb, var(--linkedin-blue) 30%, transparent);
+  --success-solid-shadow: color-mix(in srgb, var(--green-600) 30%, transparent);
+  --avatar-gradient: linear-gradient(135deg, var(--linkedin-blue), var(--linkedin-blue-light));
+
+  /* Theme tokens (dark). */
   --bg: #131316;
   --surface: #1a1a1e;
   --surface-2: #222227;
@@ -7,8 +26,8 @@
   --text: #ededed;
   --text-dim: #a1a1a1;
   --text-faint: #7a7a84;
-  --accent: #0a66c2;
-  --accent-bright: #70b5f9;
+  --accent: var(--linkedin-blue);
+  --accent-bright: var(--linkedin-blue-light);
   --shadow: rgba(0, 0, 0, 0.7);
   --card-bg: #1b1f23;
   --card-border: #38434f;
@@ -16,10 +35,11 @@
   --card-dim: rgba(255, 255, 255, 0.6);
   --card-faint: rgba(255, 255, 255, 0.45);
   --card-hover: rgba(255, 255, 255, 0.06);
-  --card-link: #70b5f9;
-  --hero-from: #fff;
-  --hero-mid: #70b5f9;
-  --accent-glow: rgba(10, 102, 194, 0.35);
+  --card-link: var(--linkedin-blue-light);
+  --hero-from: var(--white);
+  --hero-mid: var(--linkedin-blue-light);
+  --hero-to: var(--linkedin-blue);
+  --accent-glow: color-mix(in srgb, var(--linkedin-blue) 35%, transparent);
   --ok: #3ecf8e;
   --warn: #f5a524;
   --bad: #ff4d4f;
@@ -33,27 +53,27 @@
 
 :root[data-theme="light"] {
   --bg: #f6f6f7;
-  --surface: #fff;
+  --surface: var(--white);
   --surface-2: #f0f0f2;
   --border: #e2e2e6;
   --border-hover: #c9c9d1;
   --text: #17171a;
   --text-dim: #4a4a55;
   --text-faint: #6c6c78;
-  --accent: #0a66c2;
-  --accent-bright: #0a66c2;
-  --accent-glow: rgba(10, 102, 194, 0.25);
+  --accent: var(--linkedin-blue);
+  --accent-bright: var(--linkedin-blue);
+  --accent-glow: color-mix(in srgb, var(--linkedin-blue) 25%, transparent);
   --ok: #0b7a47;
   --warn: #8f5b0a;
   --bad: #c4252b;
   --shadow: rgba(20, 20, 30, 0.18);
-  --card-bg: #fff;
+  --card-bg: var(--white);
   --card-border: #e0dfdc;
   --card-text: rgba(0, 0, 0, 0.9);
   --card-dim: rgba(0, 0, 0, 0.66);
   --card-faint: rgba(0, 0, 0, 0.55);
   --card-hover: rgba(0, 0, 0, 0.05);
-  --card-link: #0a66c2;
+  --card-link: var(--linkedin-blue);
   --hero-from: #17171a;
   --hero-mid: #1d6fc9;
   color-scheme: light;

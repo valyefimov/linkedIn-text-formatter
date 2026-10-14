@@ -30,7 +30,7 @@
 
 .editor:focus-within {
   border-color: var(--border-hover);
-  box-shadow: 0 0 0 4px rgba(10, 102, 194, 0.08);
+  box-shadow: 0 0 0 4px var(--accent-tint);
 }
 
 .modeBar {
@@ -217,11 +217,11 @@
   padding: 6px 12px;
   border: 0;
   border-radius: var(--radius);
-  background: #0a66c2;
-  color: #fff;
+  background: var(--accent-solid);
+  color: var(--on-accent);
   font-size: 13px;
   font-weight: 600;
-  box-shadow: 0 1px 2px rgba(10, 102, 194, 0.3);
+  box-shadow: 0 1px 2px var(--accent-solid-shadow);
   transition:
     filter 0.15s var(--ease),
     background 0.25s var(--ease),
@@ -229,13 +229,13 @@
 }
 
 .primary:hover:not(:disabled) {
-  background: #004182;
+  background: var(--accent-solid-hover);
   box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
 .primary[data-copied="true"] {
-  background: #0e9255;
-  box-shadow: 0 1px 2px rgba(14, 146, 85, 0.3);
+  background: var(--success-solid);
+  box-shadow: 0 1px 2px var(--success-solid-shadow);
 }
 
 .primary:disabled {
