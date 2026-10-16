@@ -1,0 +1,5 @@
+/* Geist is not bundled into the extension; fall back to the platform UI fonts. */
+:host {
+  --font-geist-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}

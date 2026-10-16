@@ -12,7 +12,11 @@
     "demo:capture": "node scripts/demo/capture.mjs",
     "demo:build": "node scripts/demo/build.mjs",
     "demo:youtube": "DEMO_SCALE=2 node scripts/demo/build.mjs",
-    "demo": "npm run build && npm run demo:capture && npm run demo:build"
+    "demo": "npm run build && npm run demo:capture && npm run demo:build",
+    "ext:dev": "wxt",
+    "ext:build": "wxt build",
+    "ext:zip": "wxt zip",
+    "postinstall": "wxt prepare"
   },
   "dependencies": {
     "marked": "^18.1.1",

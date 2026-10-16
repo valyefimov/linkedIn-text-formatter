@@ -13,3 +13,7 @@ scripts/demo/.build
 scripts/demo/youtube
 docs/demo.mp4
 docs/demo-poster.png
+
+# browser extension (WXT)
+.wxt
+.output
