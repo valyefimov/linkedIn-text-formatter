@@ -62,7 +62,14 @@ const MODES: readonly { id: Mode; label: string }[] = [
   { id: "markdown", label: "Markdown" },
 ];
 
-export const Editor = () => {
+interface EditorProps {
+  /** Starts from this text instead of the saved draft, e.g. what is already in the LinkedIn composer. */
+  initialText?: string;
+  /** Adds an action that hands the final text over instead of only copying it. */
+  onInsert?: (text: string) => void;
+}
+
+export const Editor = ({ initialText, onInsert }: EditorProps) => {
   const [mode, setMode, modeReady] = usePersistentState<Mode>("ltf:mode", "write");
   const [codeStyle, setCodeStyle] = usePersistentState<CodeStyle>("ltf:code-style", "monospace");
   const [autoConvert, setAutoConvert] = usePersistentState("ltf:auto-convert", true);
@@ -101,6 +108,10 @@ export const Editor = () => {
       if (m !== null) markdown.reset(m);
     } catch {
       // Storage unavailable: start empty.
+    }
+    if (initialText) {
+      write.reset(initialText);
+      setMode("write");
     }
     setDraftReady(true);
   }, []);
@@ -340,17 +351,35 @@ export const Editor = () => {
                 Clear
               </button>
             </div>
-            <motion.button
-              type="button"
-              className={styles.primary}
-              onClick={() => void copyOutput()}
-              disabled={output === ""}
-              data-copied={copiedKey === "output"}
-              whileTap={{ scale: 0.97 }}
-            >
-              {copiedKey === "output" ? <CheckIcon /> : <CopyIcon />}
-              {copiedKey === "output" ? "Copied" : "Copy for LinkedIn"}
-            </motion.button>
+            {onInsert ? (
+              <div className={styles.footRight}>
+                <button type="button" className={styles.ghost} onClick={() => void copyOutput()} disabled={output === ""}>
+                  {copiedKey === "output" ? "Copied" : "Copy"}
+                </button>
+                <motion.button
+                  type="button"
+                  className={styles.primary}
+                  onClick={() => onInsert(output)}
+                  disabled={output === ""}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  <CheckIcon />
+                  Insert into post
+                </motion.button>
+              </div>
+            ) : (
+              <motion.button
+                type="button"
+                className={styles.primary}
+                onClick={() => void copyOutput()}
+                disabled={output === ""}
+                data-copied={copiedKey === "output"}
+                whileTap={{ scale: 0.97 }}
+              >
+                {copiedKey === "output" ? <CheckIcon /> : <CopyIcon />}
+                {copiedKey === "output" ? "Copied" : "Copy for LinkedIn"}
+              </motion.button>
+            )}
           </footer>
         </section>
 
