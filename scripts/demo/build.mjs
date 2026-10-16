@@ -1,23 +1,25 @@
-// Builds docs/demo.mp4: real UI frames (see capture.mjs), narration by termdub,
-// burned-in captions, and an ambient music bed that ducks under the voice.
-import { spawnSync } from "node:child_process";
+// Builds docs/demo.mp4: real UI frames (see capture.mjs), narration by termdub
+// and burned-in captions. Voice only, no music. DEMO_SCALE=2 renders a 2560x1440
+// copy for YouTube into scripts/demo/youtube/ instead.
 import { mkdirSync, rmSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { compose } from "@vefimov/termdub";
-import { music } from "./music.mjs";
+import { PROVIDERS } from "@vefimov/termdub/tts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const shots = join(root, "scripts/demo/.shots");
 const buildDir = join(root, "scripts/demo/.build");
-const narrated = join(buildDir, "narrated.mp4");
-const bed = join(buildDir, "music.wav");
-const out = join(root, "docs/demo.mp4");
+const scale = Number(process.env.DEMO_SCALE ?? 1);
+const youtube = scale > 1;
+const out = youtube ? join(root, "scripts/demo/youtube/demo.mp4") : join(root, "docs/demo.mp4");
+const posterFile = youtube ? join(root, "scripts/demo/youtube/thumbnail.png") : join(root, "docs/demo-poster.png");
 
 const FONT = `-apple-system, "SF Pro Display", "Segoe UI", Roboto, sans-serif`;
 
 const page = (body, extra = "") => `<!doctype html><html><head><meta charset="utf-8"><style>
 *{box-sizing:border-box}
+html{zoom:${scale}}
 html,body{margin:0;width:1280px;height:720px;overflow:hidden;background:#131316;color:#ededed;font-family:${FONT}}
 .shot{position:absolute;inset:0;width:1280px;height:720px;object-fit:cover}
 .shade{position:absolute;inset:auto 0 0 0;height:190px;background:linear-gradient(transparent,rgba(0,0,0,.55))}
@@ -96,33 +98,20 @@ const scenes = [
   })(),
 }));
 
-const run = (cmd, args) => {
-  const res = spawnSync(cmd, args, { encoding: "utf8" });
-  if (res.status !== 0) throw new Error(`${cmd} failed:\n${res.stderr}`);
-  return res.stdout.trim();
-};
+// Without edge-tts termdub silently falls back to macOS `say`, which is a different voice.
+if (!PROVIDERS.edge.available()) throw new Error("edge-tts not found. Install it (pip install edge-tts) or set EDGE_TTS=/path/to/edge-tts");
 
 rmSync(buildDir, { recursive: true, force: true });
 mkdirSync(buildDir, { recursive: true });
 
 const { seconds } = await compose({
-  out: narrated,
-  size: { width: 1280, height: 720 },
+  out,
+  size: { width: 1280 * scale, height: 720 * scale },
   tts: { provider: "edge", voice: process.env.DEMO_VOICE ?? "en-US-AndrewNeural", rate: "+2%" },
   timing: { lead: 0.5, tail: 0.8, gap: 0.3 },
-  poster: { at: 14, file: join(root, "docs/demo-poster.png") },
+  poster: { at: 14, file: posterFile },
   workDir: join(buildDir, "work"),
   scenes,
 });
 
-music(bed, Math.ceil(seconds) + 2);
-
-// The music bed is mixed under the voice and ducks a few dB whenever someone is speaking.
-run("ffmpeg", [
-  "-y", "-loglevel", "error", "-i", narrated, "-i", bed,
-  "-filter_complex",
-  "[1:a]volume=2.2[m];[0:a]asplit=2[v][sc];[m][sc]sidechaincompress=threshold=0.02:ratio=4:attack=30:release=400[duck];[v][duck]amix=inputs=2:duration=first:normalize=0[a]",
-  "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", out,
-]);
-
-console.log(`🎵 ${out} (${seconds.toFixed(1)}s)`);
+console.log(`🎙️ ${out} (${seconds.toFixed(1)}s)`);
