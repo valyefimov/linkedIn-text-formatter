@@ -1,5 +1,5 @@
 // Renders the generated source artwork at every app icon size with headless Chrome.
-// Source: scripts/assets/icon-source.png. Outputs: app/PWA PNGs and a multi-size favicon.ico.
+// Source: scripts/assets/icon-source.svg. Outputs: app/PWA PNGs and a multi-size favicon.ico.
 // Run: node scripts/icons.mjs
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
@@ -12,7 +12,7 @@ const CHROME =
   ["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/usr/bin/google-chrome", "/usr/bin/chromium"].find(existsSync);
 if (!CHROME) throw new Error("Chrome not found. Set CHROME=/path/to/chrome");
 
-const source = `data:image/png;base64,${readFileSync(join(root, "scripts/assets/icon-source.png")).toString("base64")}`;
+const source = `data:image/svg+xml;base64,${readFileSync(join(root, "scripts/assets/icon-source.svg")).toString("base64")}`;
 const PNGS = [
   { file: "public/icons/icon-192.png", size: 192, rounded: true },
   { file: "public/icons/icon-512.png", size: 512, rounded: true },
