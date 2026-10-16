@@ -4,10 +4,6 @@
 
 ![LinkedIn Text Formatter: editor, feed preview and character counter](docs/screenshot.png)
 
-[![Watch the demo video](docs/demo-poster.png)](docs/demo.mp4)
-
-*Click the poster to watch the 87-second demo (narrated, with captions and music).*
-
 Write LinkedIn posts with **bold**, *italic*, underline, strikethrough, `monospace` code and lists,
 convert Markdown to LinkedIn-ready text, and preview the post as it will look in the feed.
 
