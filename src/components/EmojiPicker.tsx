@@ -19,16 +19,20 @@ export const EmojiPicker = ({ open, onPick, onClose }: EmojiPickerProps) => {
 
   useEffect(() => {
     if (!open) return;
-    const onPointer = (e: PointerEvent) => {
-      const target = e.target as Element | null;
-      if (ref.current && !ref.current.contains(target) && !target?.closest("[aria-haspopup='dialog']")) onClose();
+    // The root node is the shadow root when the editor runs inside the browser extension,
+    // where events reaching `document` are retargeted to the shadow host.
+    const root = ref.current?.getRootNode() ?? document;
+    const onPointer = (e: Event) => {
+      const path = e.composedPath();
+      const onTrigger = path.some((node) => node instanceof Element && node.matches("[aria-haspopup='dialog']"));
+      if (ref.current && !path.includes(ref.current) && !onTrigger) onClose();
     };
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    document.addEventListener("pointerdown", onPointer);
-    document.addEventListener("keydown", onKey);
+    const onKey = (e: Event) => e instanceof KeyboardEvent && e.key === "Escape" && onClose();
+    root.addEventListener("pointerdown", onPointer);
+    root.addEventListener("keydown", onKey);
     return () => {
-      document.removeEventListener("pointerdown", onPointer);
-      document.removeEventListener("keydown", onKey);
+      root.removeEventListener("pointerdown", onPointer);
+      root.removeEventListener("keydown", onKey);
     };
   }, [open, onClose]);
 
