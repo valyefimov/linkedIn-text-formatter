@@ -24,6 +24,7 @@ import {
   type Selection,
   type TargetId,
   insertAt,
+  keepBlankLines,
   looksLikeMarkdown,
   toggleList,
   transformSelection,
@@ -231,7 +232,7 @@ export const Editor = ({ initialText, onInsert }: EditorProps) => {
   };
 
   const copyOutput = async () => {
-    const ok = await copy(output, "output");
+    const ok = await copy(keepBlankLines(output), "output");
     if (!ok) showToast("Couldn't access the clipboard");
   };
 
