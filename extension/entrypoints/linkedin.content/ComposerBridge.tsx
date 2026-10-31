@@ -16,12 +16,11 @@ interface Session {
 
 const linkedInTheme = (): Theme => (document.body.dataset.colorScheme === "dark" ? "dark" : "light");
 
-const FormatIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path
-      fillRule="evenodd"
-      d="M6 4h7.5a4.25 4.25 0 0 1 3.06 7.2A4.5 4.5 0 0 1 14 20H6zm3 3v3.5h4.5a1.75 1.75 0 0 0 0-3.5zm0 6.25V17h5a1.88 1.88 0 0 0 0-3.75z"
-    />
+const AppIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 512 512" aria-hidden="true">
+    <rect width="512" height="512" rx="112" fill="#0a66c2" />
+    <path fill="#fff" fillRule="evenodd" d="M83 371 187 139h77l104 232h-69l-20-50H172l-20 50H83Zm109-103h67l-33-82-34 82Z" />
+    <rect x="396" y="147" width="27" height="224" rx="13.5" fill="#76e4ff" />
   </svg>
 );
 
@@ -68,7 +67,7 @@ export const ComposerBridge = ({ editor, host }: ComposerBridgeProps) => {
         aria-label="Format with LinkedIn Text Formatter"
         title="Format with LinkedIn Text Formatter"
       >
-        <FormatIcon />
+        <AppIcon />
       </button>
       <dialog
         ref={dialogRef}

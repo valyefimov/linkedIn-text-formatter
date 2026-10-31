@@ -5,15 +5,20 @@ import { defineContentScript } from "wxt/utils/define-content-script";
 import "@/app/globals.css";
 import "./style.css";
 import { ComposerBridge } from "./ComposerBridge";
-import { findComposerEditors, findTriggerSpot } from "./composer";
+import { findComposerEditors, findTriggerSpot, type TriggerSpot } from "./composer";
 
 type Ui = ShadowRootContentScriptUi<Root>;
 
-const mountBridge = async (ctx: ContentScriptContext, editor: HTMLElement): Promise<Ui> => {
+interface Bridge {
+  ui: Ui;
+  anchor: Element;
+}
+
+const mountBridge = async (ctx: ContentScriptContext, editor: HTMLElement, spot: TriggerSpot): Promise<Ui> => {
   const ui = await createShadowRootUi(ctx, {
     name: "ltf-composer-bridge",
     position: "inline",
-    ...findTriggerSpot(editor),
+    ...spot,
     // Keep typing inside the formatter from triggering LinkedIn's keyboard shortcuts.
     isolateEvents: true,
     onMount: (container, _shadow, host) => {
@@ -30,18 +35,26 @@ const mountBridge = async (ctx: ContentScriptContext, editor: HTMLElement): Prom
 
 /** LinkedIn is a single-page app: composers open and close without navigation, so watch the DOM. */
 const watchComposers = (ctx: ContentScriptContext) => {
-  const bridges = new Map<HTMLElement, Promise<Ui>>();
+  const bridges = new Map<HTMLElement, Bridge>();
+  const mounting = new Set<HTMLElement>();
   let scheduled = false;
 
   const sync = () => {
     scheduled = false;
-    for (const [editor, ui] of bridges) {
-      if (editor.isConnected) continue;
+    // Comment boxes re-render their toolbar as the user types, so follow the trigger spot, not just the editor.
+    for (const [editor, { ui, anchor }] of bridges) {
+      if (editor.isConnected && ui.shadowHost.isConnected && findTriggerSpot(editor).anchor === anchor) continue;
       bridges.delete(editor);
-      void ui.then((u) => u.remove());
+      ui.remove();
     }
     for (const editor of findComposerEditors()) {
-      if (!bridges.has(editor)) bridges.set(editor, mountBridge(ctx, editor));
+      if (bridges.has(editor) || mounting.has(editor)) continue;
+      const spot = findTriggerSpot(editor);
+      mounting.add(editor);
+      void mountBridge(ctx, editor, spot).then((ui) => {
+        mounting.delete(editor);
+        bridges.set(editor, { ui, anchor: spot.anchor });
+      });
     }
   };
 

@@ -8,15 +8,12 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--text-dim);
-  transition:
-    background 0.15s var(--ease),
-    color 0.15s var(--ease);
+  transition: background 0.15s var(--ease);
 }
 
+/* A neutral tint that matches LinkedIn's own toolbar buttons in both its light and dark themes. */
 .trigger:hover {
-  background: var(--surface-2);
-  color: var(--text);
+  background: rgb(140 140 140 / 0.16);
 }
 
 .dialog {
