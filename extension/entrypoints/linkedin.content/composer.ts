@@ -1,14 +1,17 @@
 /**
- * DOM glue for LinkedIn's post composer and comment boxes, both Tiptap (ProseMirror) editors.
+ * DOM glue for LinkedIn's post composer and comment boxes. Most are Tiptap (ProseMirror) editors;
+ * older pages such as a single post's view still render Quill comment boxes.
  * Selectors avoid LinkedIn's hashed class names and localized labels.
  */
 
 const COMMENT_EDITOR_SELECTOR = '[componentkey^="commentBox-"][contenteditable="true"]';
+const LEGACY_COMMENT_EDITOR_SELECTOR = '.comments-comment-box .ql-editor[contenteditable="true"]';
 
 const EDITOR_SELECTORS = [
   '[componentkey="ShareBox_textEditor"][contenteditable="true"]',
   '[data-sdui-screen$="ShareCompose"] .ProseMirror[contenteditable="true"]',
   COMMENT_EDITOR_SELECTOR,
+  LEGACY_COMMENT_EDITOR_SELECTOR,
 ];
 
 export const findComposerEditors = (): HTMLElement[] => [
@@ -32,6 +35,12 @@ const commentEmojiButton = (editor: HTMLElement): HTMLButtonElement | null => {
 
 /** Where the trigger goes: after the toolbar's emoji or photo button, or under the editor if neither is found. */
 export const findTriggerSpot = (editor: HTMLElement): TriggerSpot => {
+  if (editor.matches(LEGACY_COMMENT_EDITOR_SELECTOR)) {
+    const form = editor.closest(".comments-comment-box__form");
+    const photo = form?.querySelector(".comments-comment-box__detour-container");
+    if (photo) return { anchor: photo, append: "after" };
+    return { anchor: editor.closest(".comments-comment-box-comment__text-editor") ?? editor, append: "after" };
+  }
   const wrapper = editor.closest('[data-testid="ui-core-tiptap-text-editor-wrapper"]') ?? editor;
   if (editor.matches(COMMENT_EDITOR_SELECTOR)) {
     const toolbar = commentEmojiButton(editor)?.parentElement;
@@ -42,9 +51,10 @@ export const findTriggerSpot = (editor: HTMLElement): TriggerSpot => {
   return { anchor: emojiButton?.parentElement?.parentElement ?? wrapper, append: "after" };
 };
 
+/** A paragraph's last `<br>` only keeps an empty line open (ProseMirror's trailing break, Quill's `<p><br></p>`). */
 const blockText = (block: Node): string => {
   if (block.nodeType === Node.TEXT_NODE) return block.textContent ?? "";
-  if (block instanceof HTMLBRElement) return block.classList.contains("ProseMirror-trailingBreak") ? "" : "\n";
+  if (block instanceof HTMLBRElement) return block === block.parentNode?.lastChild ? "" : "\n";
   return Array.from(block.childNodes, blockText).join("");
 };
 
