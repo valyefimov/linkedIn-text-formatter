@@ -129,13 +129,6 @@ export const Editor = ({ initialText, onInsert }: EditorProps) => {
 
   useLayoutEffect(() => {
     const area = areaRef.current;
-    if (!area) return;
-    area.style.height = "auto";
-    area.style.height = `${area.scrollHeight}px`;
-  }, [active.value, mode]);
-
-  useLayoutEffect(() => {
-    const area = areaRef.current;
     const selection = pendingSelection.current;
     if (!area || !selection) return;
     pendingSelection.current = null;
